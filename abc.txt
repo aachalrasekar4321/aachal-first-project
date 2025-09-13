@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gym Signup Form</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: #f0f8ff;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+            padding: 30px;
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        input[type="text"],
+        input[type="email"],
+        input[type="number"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        .radio-group {
+            display: flex;
+            gap: 20px;
+            margin-top: 5px;
+        }
+        .radio-option {
+            display: flex;
+            align-items: center;
+        }
+        .radio-option input {
+            margin-right: 5px;
+        }
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 15px;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        .confirmation {
+            display: none;
+            text-align: center;
+            padding: 20px;
+            background-color: #eaf7ea;
+            border-radius: 5px;
+            margin-top: 20px;
+            border: 1px solid #c3e6cb;
+        }
+        .confirmation h2 {
+            color: #2ecc71;
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Gym Membership Signup</h1>
+        <form id="gymForm">
+            <div class="form-group">
+                <label for="name">Full Name:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Email Address:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="age">Age:</label>
+                <input type="number" id="age" name="age" min="16" max="100" required>
+            </div>
+            
+            <div class="form-group">
+                <label>Gender:</label>
+                <div class="radio-group">
+                    <div class="radio-option">
+                        <input type="radio" id="male" name="gender" value="male" required>
+                        <label for="male">Male</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="female" name="gender" value="female">
+                        <label for="female">Female</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="other" name="gender" value="other">
+                        <label for="other">Other</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="membership">Membership Plan:</label>
+                <select id="membership" name="membership" required>
+                    <option value="">Select a plan</option>
+                    <option value="basic">Basic (1000/month)</option>
+                    <option value="standard">Standard (2000/month)</option>
+                    <option value="premium">Premium (3000/month)</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label>Preferred Time Slot:</label>
+                <div class="radio-group" style="flex-direction: column; gap: 10px;">
+                    <div class="radio-option">
+                        <input type="radio" id="morning" name="time" value="morning">
+                        <label for="morning">Morning (6am-10am)</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="afternoon" name="time" value="afternoon">
+                        <label for="afternoon">Afternoon (10am-4pm)</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="evening" name="time" value="evening">
+                        <label for="evening">Evening (4pm-9pm)</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="goals">Fitness Goals:</label>
+                <textarea id="goals" name="goals" placeholder="Describe your fitness goals..."></textarea>
+            </div>
+            
+            <button type="submit">Sign Up</button>
+        </form>
+        
+        <div id="confirmation" class="confirmation">
+            <h2>Thank You for Signing Up!</h2>
+            <p>Your gym membership has been confirmed. We look forward to helping you achieve your fitness goals!</p>
+            <p>A confirmation email has been sent to your email address.</p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('gymForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            // Check if a time slot is selected
+            const timeSelected = document.querySelector('input[name="time"]:checked');
+            
+            if (!timeSelected) {
+                alert('Please select a preferred time slot.');
+                return;
+            }
+            
+            // If time slot is selected, show confirmation
+            document.getElementById('confirmation').style.display = 'block';
+            
+            // Optional: Scroll to confirmation message
+            document.getElementById('confirmation').scrollIntoView({ behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>
